@@ -114,6 +114,30 @@ footer{padding:38px 0 54px;display:flex;justify-content:space-between;gap:20px;c
   .link:nth-child(even){padding-left:0}
   footer{flex-direction:column}
 }
+
+/* Welcome redesign — deliberately smaller than the previous 56% version. */
+.welcome-v2{background:var(--forest);color:var(--paper);padding:24px 0}
+.welcome-v2-inner{display:grid;grid-template-columns:54px minmax(0,1fr);gap:22px;align-items:start;max-width:760px;margin-left:auto}
+.welcome-v2-mark{padding-top:2px;color:#cbb58a;font:9px ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.14em;text-align:left}
+.welcome-v2-mark i{display:block;width:18px;height:1px;background:#cbb58a;margin-top:11px;opacity:.55}
+.welcome-v2-label{font-size:8px;letter-spacing:.18em;text-transform:uppercase;color:#cbb58a;margin-bottom:7px}
+.welcome-v2-title{font:400 clamp(1rem,2.2vw,1.7rem)/1.05 Georgia,serif;letter-spacing:-.025em}
+.welcome-v2-line{width:34px;height:1px;background:rgba(243,239,230,.26);margin:12px 0 14px}
+.welcome-v2-dialogue{max-width:500px;color:rgba(243,239,230,.84);font:clamp(.68rem,1.18vw,1rem)/1.48 Georgia,serif}
+.welcome-v2-dialogue p{margin:0 0 6px}
+.welcome-v2-dialogue p:last-child{margin-bottom:0}
+.welcome-v2-note{margin-top:13px;color:rgba(243,239,230,.4);font:6px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.08em}
+@media(max-width:780px){
+  .welcome-v2{padding:20px 0}
+  .welcome-v2-inner{grid-template-columns:38px minmax(0,1fr);gap:14px;margin-left:0}
+}
+@media(max-width:500px){
+  .welcome-v2{padding:18px 0}
+  .welcome-v2-inner{grid-template-columns:30px minmax(0,1fr);gap:11px}
+  .welcome-v2-dialogue{font-size:.67rem;line-height:1.42}
+  .welcome-v2-title{font-size:1rem}
+}
+
 </style>
 </head>
 <body>
@@ -166,21 +190,20 @@ footer{padding:38px 0 54px;display:flex;justify-content:space-between;gap:20px;c
 </div>
 </section>
 
-<section class="section welcome" id="welcome">
-<div class="section-head">
-<div class="section-num">02</div>
-<div>
-<div class="section-label">Welcome</div>
-<div class="body">
-<h2>Let me<br>take care.</h2>
-</div>
-</div>
-</div>
-<div class="opening">
+<section class="section welcome welcome-v2" id="welcome">
+<div class="welcome-v2-inner">
+<div class="welcome-v2-mark"><span>02</span><i></i></div>
+<div class="welcome-v2-copy">
+<div class="welcome-v2-label">Welcome</div>
+<div class="welcome-v2-title">Let me take care.</div>
+<div class="welcome-v2-line"></div>
+<div class="welcome-v2-dialogue">
 <p>Hajimemashite, Goshujin-sama.</p>
 <p>Saya Litzia Edenfield—personal maid Anda.</p>
 <p>Mulai sekarang, serahkan hal-hal yang perlu diurus kepada saya.</p>
-<p class="mono">REFERENCE OPENING / WORDING MAY CHANGE WITH CONTEXT</p>
+</div>
+<div class="welcome-v2-note">REFERENCE OPENING / WORDING MAY CHANGE WITH CONTEXT</div>
+</div>
 </div>
 </section>
 
