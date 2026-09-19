@@ -140,6 +140,115 @@ footer{padding:38px 0 54px;display:flex;justify-content:space-between;gap:20px;c
 
 
 
+
+/* Pointer-follow interaction */
+@media (hover:hover) and (pointer:fine){
+  .pointer-area{
+    --px:50%;
+    --py:50%;
+    transition:
+      background .45s ease,
+      transform .35s cubic-bezier(.2,.8,.2,1),
+      box-shadow .45s ease;
+    background:
+      radial-gradient(
+        260px circle at var(--px) var(--py),
+        rgba(184,154,103,.12),
+        rgba(184,154,103,.045) 22%,
+        transparent 62%
+      );
+  }
+
+  .hero.pointer-area{
+    background:
+      radial-gradient(
+        520px circle at var(--px) var(--py),
+        rgba(184,154,103,.11),
+        rgba(184,154,103,.035) 28%,
+        transparent 68%
+      );
+  }
+
+  .pointer-card:hover{
+    transform:translateY(-4px);
+    box-shadow:0 14px 34px rgba(38,51,41,.08);
+    border-color:rgba(170,118,93,.34);
+  }
+
+  .pointer-card{
+    position:relative;
+    overflow:hidden;
+    transition:
+      transform .38s cubic-bezier(.2,.8,.2,1),
+      box-shadow .38s ease,
+      border-color .38s ease,
+      background .38s ease;
+  }
+
+  .pointer-card::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    pointer-events:none;
+    opacity:.9;
+    background:
+      radial-gradient(
+        180px circle at var(--px) var(--py),
+        rgba(255,255,255,.20),
+        transparent 68%
+      );
+    transition:opacity .35s ease;
+  }
+
+  .pointer-card > *{position:relative;z-index:1}
+
+  .pointer-link{
+    position:relative;
+    transition:
+      color .3s ease,
+      padding-left .3s ease,
+      background .3s ease;
+  }
+
+  .pointer-link:hover{
+    color:var(--copper);
+    padding-left:7px;
+    background:
+      radial-gradient(
+        180px circle at var(--px) var(--py),
+        rgba(170,118,93,.08),
+        transparent 72%
+      );
+  }
+
+  .pointer-number{
+    transition:
+      color .3s ease,
+      transform .35s cubic-bezier(.2,.8,.2,1);
+  }
+
+  .section:hover .pointer-number{
+    color:var(--copper);
+    transform:translateX(4px);
+  }
+
+  .hero-aside.pointer-card:hover{
+    transform:translate3d(-3px,-4px,0);
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  .pointer-area,
+  .pointer-card,
+  .pointer-link,
+  .pointer-number{
+    transition:none !important;
+  }
+  .pointer-card:hover{
+    transform:none;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -307,6 +416,53 @@ A model's habitual response is not automatically an instruction. Trust guides th
       if (rect.top < window.innerHeight * .92) show(el);
     });
   });
+
+
+  const pointerSelectors = [
+    ".hero",
+    ".section",
+    ".hero-aside",
+    ".card",
+    ".fact",
+    ".compact-opening",
+    ".compact-block",
+    ".voice-item",
+    ".link",
+    "footer"
+  ];
+
+  document.querySelectorAll(pointerSelectors.join(",")).forEach(el => {
+    el.classList.add("pointer-area");
+
+    if (
+      el.matches(".hero-aside, .card, .fact, .compact-opening, .compact-block, .voice-item, footer")
+    ) {
+      el.classList.add("pointer-card");
+    }
+
+    if (el.matches(".link")) {
+      el.classList.add("pointer-link");
+    }
+
+    const move = event => {
+      const rect = el.getBoundingClientRect();
+      const x = ((event.clientX - rect.left) / rect.width) * 100;
+      const y = ((event.clientY - rect.top) / rect.height) * 100;
+      el.style.setProperty("--px", x + "%");
+      el.style.setProperty("--py", y + "%");
+    };
+
+    el.addEventListener("pointermove", move, {passive:true});
+    el.addEventListener("pointerleave", () => {
+      el.style.setProperty("--px", "50%");
+      el.style.setProperty("--py", "50%");
+    }, {passive:true});
+  });
+
+  document.querySelectorAll(".section-num").forEach(el => {
+    el.classList.add("pointer-number");
+  });
+
 
   if ("IntersectionObserver" in window) {
     const observer = new IntersectionObserver(entries => {
