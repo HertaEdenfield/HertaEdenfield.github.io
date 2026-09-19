@@ -130,12 +130,6 @@ footer{padding:38px 0 54px;display:flex;justify-content:space-between;gap:20px;c
   transform:translate3d(0,0,0);
   filter:blur(0);
 }
-.motion-line{
-  transform-origin:left center;
-  clip-path:inset(0 100% 0 0);
-  transition:clip-path .9s cubic-bezier(.22,.8,.24,1);
-}
-.motion-line.visible{clip-path:inset(0 0 0 0)}
 @media(prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   .reveal,
@@ -145,13 +139,7 @@ footer{padding:38px 0 54px;display:flex;justify-content:space-between;gap:20px;c
     transform:none;
     filter:none;
     transition:none;
-  }
-  .motion-line,
-  .motion-line.visible{
-    clip-path:none;
-    transition:none;
-  }
-}
+  }}
 
 </style>
 </head>
@@ -312,7 +300,6 @@ A model's habitual response is not automatically an instruction. Trust guides th
 
   if (reduceMotion) {
     document.querySelectorAll(".reveal").forEach(el => el.classList.add("visible"));
-    document.querySelectorAll(".motion-line").forEach(el => el.classList.add("visible"));
     return;
   }
 
@@ -327,7 +314,7 @@ A model's habitual response is not automatically an instruction. Trust guides th
     rootMargin: "0px 0px -7% 0px"
   });
 
-  document.querySelectorAll(".reveal, .motion-line").forEach(el => observer.observe(el));
+  document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
 })();
 </script>
 
