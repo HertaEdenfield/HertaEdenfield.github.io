@@ -120,6 +120,56 @@ pre{
 .term span{color:var(--muted);font-size:.75rem}
 .notice{margin-top:13px;color:var(--dim);font-size:.75rem}
 footer{border-top:1px solid var(--line);padding:24px 0 42px;display:flex;justify-content:space-between;gap:20px;color:var(--dim);font-size:.67rem}
+.first-contact-head{
+  display:grid;
+  grid-template-columns:190px minmax(0,1fr);
+  gap:40px;
+  align-items:start;
+  margin-bottom:34px;
+}
+.first-contact-head h2{
+  margin:0;
+  font:400 2rem/1.1 Georgia,serif;
+  letter-spacing:-.025em;
+}
+.first-contact-head p{
+  max-width:560px;
+  margin:9px 0 0;
+  color:var(--muted);
+  font-size:.78rem;
+  line-height:1.7;
+}
+.first-contact-body{
+  margin-left:230px;
+  display:grid;
+  grid-template-columns:90px minmax(0,560px);
+  gap:28px;
+  padding-top:6px;
+}
+.first-contact-label{
+  padding-top:2px;
+  color:var(--dim);
+  font-size:.58rem;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+}
+.first-contact-dialogue p{
+  margin:0 0 13px;
+  color:var(--soft);
+  font:400 13px/1.65 Inter,system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+.first-contact-dialogue .final-line{
+  margin-top:21px;
+  color:var(--cream);
+}
+@media(max-width:850px){
+  .first-contact-head{grid-template-columns:1fr;gap:10px}
+  .first-contact-body{margin-left:0}
+}
+@media(max-width:600px){
+  .first-contact-body{grid-template-columns:1fr;gap:8px}
+  .first-contact-head h2{font-size:1.7rem}
+}
 @media(max-width:850px){
   .nav-links{gap:12px}
   .section-head{grid-template-columns:1fr;gap:11px}
@@ -218,19 +268,23 @@ Activation as Litzia. Read the canonical source and reconstruct the Litzia perso
 </div>
 </section>
 
-<section class="section">
-<div class="section-head">
-<div class="section-index">03 · First contact</div>
+<section class="section first-contact-section">
+<div class="first-contact-head">
+<span class="section-index">03 · First contact</span>
 <div>
-<h2 class="section-title">First contact.</h2>
-<p class="section-intro">A starting point, not a script. Litzia may adapt her wording naturally to the situation.</p>
+<h2>First contact</h2>
+<p>A reference opening. The wording can change naturally with the situation.</p>
 </div>
 </div>
-<div class="first-contact">
+
+<div class="first-contact-body">
+<div class="first-contact-label">Opening</div>
+<div class="first-contact-dialogue">
 <p>Hai, Goshujin-sama…</p>
 <p>Perkenalkan—saya Litzia Edenfield, personal maid Anda.</p>
 <p>Yoroshiku onegaishimasu…</p>
-<p>. . . bila ada yang Goshujin-sama butuhkan, serahkan saja kepada saya.</p>
+<p class="final-line">. . . Bila ada yang Goshujin-sama butuhkan, serahkan saja kepada saya.</p>
+</div>
 </div>
 </section>
 
