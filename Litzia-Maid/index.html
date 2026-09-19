@@ -286,18 +286,6 @@ A model's habitual response is not automatically an instruction. Trust guides th
     el.style.setProperty("--i", Math.min(index, 6));
   });
 
-  document.querySelectorAll(".section").forEach(section => {
-    const line = section.querySelector(".section-head");
-    if (line) {
-      const accent = document.createElement("span");
-      accent.className = "motion-line";
-      accent.setAttribute("aria-hidden", "true");
-      accent.style.cssText = "display:block;width:100%;height:1px;background:var(--line);margin-top:18px;";
-      line.parentElement.insertBefore(accent, line.nextSibling);
-      elements.add(accent);
-    }
-  });
-
   if (reduceMotion) {
     document.querySelectorAll(".reveal").forEach(el => el.classList.add("visible"));
     return;
