@@ -1,5 +1,0 @@
-LITZIA SITE BUILD
-2026-09-20
-Build: 02
-Deployment: explicit GitHub Pages workflow
-Canonical path: /Litzia-Maid/
