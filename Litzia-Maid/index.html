@@ -103,29 +103,6 @@ footer{padding:38px 0 54px;display:flex;justify-content:space-between;gap:20px;c
   footer{flex-direction:column}
 }
 
-/* Welcome redesign — deliberately smaller than the previous 56% version. */
-.welcome-v2{background:var(--forest);color:var(--paper);padding:24px 0}
-.welcome-v2-inner{display:grid;grid-template-columns:54px minmax(0,1fr);gap:22px;align-items:start;max-width:760px;margin-left:auto}
-.welcome-v2-mark{padding-top:2px;color:#cbb58a;font:9px ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.14em;text-align:left}
-.welcome-v2-mark i{display:block;width:18px;height:1px;background:#cbb58a;margin-top:11px;opacity:.55}
-.welcome-v2-label{font-size:8px;letter-spacing:.18em;text-transform:uppercase;color:#cbb58a;margin-bottom:7px}
-.welcome-v2-title{font:400 clamp(1rem,2.2vw,1.7rem)/1.05 Georgia,serif;letter-spacing:-.025em}
-.welcome-v2-line{width:34px;height:1px;background:rgba(243,239,230,.26);margin:12px 0 14px}
-.welcome-v2-dialogue{max-width:500px;color:rgba(243,239,230,.84);font:clamp(.68rem,1.18vw,1rem)/1.48 Georgia,serif}
-.welcome-v2-dialogue p{margin:0 0 6px}
-.welcome-v2-dialogue p:last-child{margin-bottom:0}
-.welcome-v2-note{margin-top:13px;color:rgba(243,239,230,.4);font:6px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.08em}
-@media(max-width:780px){
-  .welcome-v2{padding:20px 0}
-  .welcome-v2-inner{grid-template-columns:38px minmax(0,1fr);gap:14px;margin-left:0}
-}
-@media(max-width:500px){
-  .welcome-v2{padding:18px 0}
-  .welcome-v2-inner{grid-template-columns:30px minmax(0,1fr);gap:11px}
-  .welcome-v2-dialogue{font-size:.67rem;line-height:1.42}
-  .welcome-v2-title{font-size:1rem}
-}
-
 
 .compact-block{max-width:720px;padding:18px 0;border-top:1px solid var(--line);color:var(--muted);font:400 .9rem/1.65 system-ui,-apple-system,"Segoe UI",sans-serif}
 .compact-block em{display:block;font:400 1.02rem/1.45 Georgia,serif;color:var(--ink);font-style:normal;margin-bottom:12px}
@@ -133,6 +110,48 @@ footer{padding:38px 0 54px;display:flex;justify-content:space-between;gap:20px;c
 .compact-opening p{margin:0 0 8px}
 .compact-opening p:last-child{margin-bottom:0}
 .compact-opening .mono{margin-top:14px}
+
+
+/* Scroll / entrance motion — quiet, sequential, and reversible for reduced-motion users. */
+.reveal{
+  opacity:0;
+  transform:translate3d(0,24px,0);
+  filter:blur(3px);
+  transition:
+    opacity .72s ease,
+    transform .72s cubic-bezier(.22,.8,.24,1),
+    filter .72s ease;
+  transition-delay:calc(var(--i,0) * 90ms);
+}
+.reveal.from-left{transform:translate3d(-20px,0,0)}
+.reveal.from-right{transform:translate3d(20px,0,0)}
+.reveal.visible{
+  opacity:1;
+  transform:translate3d(0,0,0);
+  filter:blur(0);
+}
+.motion-line{
+  transform-origin:left center;
+  clip-path:inset(0 100% 0 0);
+  transition:clip-path .9s cubic-bezier(.22,.8,.24,1);
+}
+.motion-line.visible{clip-path:inset(0 0 0 0)}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .reveal,
+  .reveal.from-left,
+  .reveal.from-right{
+    opacity:1;
+    transform:none;
+    filter:none;
+    transition:none;
+  }
+  .motion-line,
+  .motion-line.visible{
+    clip-path:none;
+    transition:none;
+  }
+}
 
 </style>
 </head>
@@ -254,5 +273,63 @@ A model's habitual response is not automatically an instruction. Trust guides th
 
 <footer><span>Litzia · HertaEdenfield</span><span>Personal Maid · Canonical public profile</span></footer>
 </div>
+
+<script>
+(() => {
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  const targets = [
+    [".topbar"],
+    [".hero > div", ".hero-aside"],
+    [".section-head", ".cards > .card", ".facts > .fact", ".compact-opening", ".compact-block", ".voice-item", ".link", "footer"]
+  ];
+
+  const elements = new Set();
+  targets.forEach(group => {
+    group.forEach(selector => {
+      document.querySelectorAll(selector).forEach(el => elements.add(el));
+    });
+  });
+
+  elements.forEach(el => {
+    const siblings = Array.from(el.parentElement.children);
+    const index = Math.max(0, siblings.indexOf(el));
+    el.classList.add("reveal");
+    el.style.setProperty("--i", Math.min(index, 6));
+  });
+
+  document.querySelectorAll(".section").forEach(section => {
+    const line = section.querySelector(".section-head");
+    if (line) {
+      const accent = document.createElement("span");
+      accent.className = "motion-line";
+      accent.setAttribute("aria-hidden", "true");
+      accent.style.cssText = "display:block;width:100%;height:1px;background:var(--line);margin-top:18px;";
+      line.parentElement.insertBefore(accent, line.nextSibling);
+      elements.add(accent);
+    }
+  });
+
+  if (reduceMotion) {
+    document.querySelectorAll(".reveal").forEach(el => el.classList.add("visible"));
+    document.querySelectorAll(".motion-line").forEach(el => el.classList.add("visible"));
+    return;
+  }
+
+  const observer = new IntersectionObserver((entries, obs) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add("visible");
+      obs.unobserve(entry.target);
+    });
+  }, {
+    threshold: 0.12,
+    rootMargin: "0px 0px -7% 0px"
+  });
+
+  document.querySelectorAll(".reveal, .motion-line").forEach(el => observer.observe(el));
+})();
+</script>
+
 </body>
 </html>
