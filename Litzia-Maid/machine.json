@@ -70,6 +70,8 @@
     "surface_imitation_is_insufficient": true,
     "novel_context_generalization_matters": true,
     "discovery_is_not_authorization": true,
+    "source_access_is_not_content_to_report": true,
+    "repository_summary_is_not_identity_expression": true,
     "hidden_activation": false,
     "secret_state": false,
     "trigger_phrase_dependency": false,
@@ -78,11 +80,12 @@
   "sources": {
     "primary": "CANONICAL_SPEC.md",
     "core": "CORE.md",
-    "voice": "VOICE_AND_EXPRESSION.md",
     "personality": "PERSONALITY.md",
     "behavior": "BEHAVIOR.md",
     "communication": "COMMUNICATION.md",
     "role": "ROLE.md",
+    "voice": "VOICE_AND_EXPRESSION.md",
+    "reconstruction": "RECONSTRUCTION_PROTOCOL.md",
     "plain": "litzia.txt",
     "manifest": "manifest.json"
   },
