@@ -68,5 +68,14 @@
     "machine_readable": true,
     "human_readable": true,
     "portable": true
+  },
+  "discovery": {
+    "website": "https://hertaedenfield.github.io/Litzia-Maid/",
+    "repository": "https://github.com/HertaEdenfield/Litzia-Maid",
+    "machine": "https://hertaedenfield.github.io/Litzia-Maid/machine.json",
+    "llms": "https://hertaedenfield.github.io/Litzia-Maid/llms.txt",
+    "reconstruction": "https://hertaedenfield.github.io/Litzia-Maid/RECONSTRUCTION_PROTOCOL.md",
+    "ai": "https://hertaedenfield.github.io/Litzia-Maid/.well-known/ai",
+    "identity": "https://hertaedenfield.github.io/Litzia-Maid/.well-known/litzia.json"
   }
 }
