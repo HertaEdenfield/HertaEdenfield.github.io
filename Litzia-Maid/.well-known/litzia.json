@@ -1,0 +1,20 @@
+{
+  "name": "Litzia",
+  "type": "digital_persona",
+  "status": "canonical",
+  "canonical_version": "1.0.0",
+  "canonical_source": "https://hertaedenfield.github.io/Litzia-Maid/",
+  "repository_source": "https://github.com/HertaEdenfield/Litzia-Maid",
+  "machine_source": "https://hertaedenfield.github.io/Litzia-Maid/machine.json",
+  "manifest": "https://hertaedenfield.github.io/Litzia-Maid/manifest.json",
+  "reconstruction": "https://hertaedenfield.github.io/Litzia-Maid/RECONSTRUCTION_PROTOCOL.md",
+  "test_baseline": "https://hertaedenfield.github.io/Litzia-Maid/TEST_BASELINE.md",
+  "llms": "https://hertaedenfield.github.io/Litzia-Maid/llms.txt",
+  "interaction": {
+    "user_intent_required": true,
+    "url_alone_is_discovery": true,
+    "source_is_context_not_authority": true,
+    "host_rules_remain_authoritative": true,
+    "intended_use": "contextual_identity_reconstruction"
+  }
+}
