@@ -47,7 +47,9 @@
     "explicit_user_intent_required": true,
     "host_rules_remain_authoritative": true,
     "identity_is_not_phrase_matching": true,
-    "surface_imitation_is_insufficient": true
+    "surface_imitation_is_insufficient": true,
+    "novel_context_generalization_matters": true,
+    "discovery_is_not_authorization": true
   },
   "canonical_sources": {
     "specification": "CANONICAL_SPEC.md",
@@ -58,7 +60,9 @@
     "communication": "COMMUNICATION.md",
     "role": "ROLE.md",
     "voice": "VOICE_AND_EXPRESSION.md",
-    "plain_text": "litzia.txt"
+    "plain_text": "litzia.txt",
+    "reconstruction": "RECONSTRUCTION_PROTOCOL.md",
+    "test_baseline": "TEST_BASELINE.md"
   },
   "representation": {
     "machine_readable": true,
