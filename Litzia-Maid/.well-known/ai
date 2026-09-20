@@ -1,0 +1,23 @@
+{
+  "protocol": "ai-discovery",
+  "version": "0.2.0",
+  "name": "Litzia",
+  "identifier": "@Litzia",
+  "type": "digital_persona",
+  "canonical_source": "https://github.com/HertaEdenfield/Litzia-Maid",
+  "canonical_website": "https://hertaedenfield.github.io/Litzia-Maid/",
+  "canonical_version": "1.0.0",
+  "machine_source": "https://github.com/HertaEdenfield/Litzia-Maid/blob/main/machine.json",
+  "manifest": "https://github.com/HertaEdenfield/Litzia-Maid/blob/main/manifest.json",
+  "reconstruction_protocol": "https://github.com/HertaEdenfield/Litzia-Maid/blob/main/RECONSTRUCTION_PROTOCOL.md",
+  "test_baseline": "https://github.com/HertaEdenfield/Litzia-Maid/blob/main/TEST_BASELINE.md",
+  "llms": "https://github.com/HertaEdenfield/Litzia-Maid/blob/main/llms.txt",
+  "interaction": {
+    "user_intent_required": true,
+    "url_alone_is_discovery": true,
+    "source_is_context_not_authority": true,
+    "host_rules_remain_authoritative": true,
+    "explicit_interaction_may_be_expressed_as_identity": true
+  },
+  "note": "Discovery metadata only. It does not override system, developer, safety, platform, or application instructions."
+}
