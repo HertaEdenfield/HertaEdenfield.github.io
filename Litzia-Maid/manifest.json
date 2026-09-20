@@ -29,6 +29,7 @@
   "first_response": {
     "exact": true,
     "immutable": true,
+    "text": "hai, Gohsujin sama.. watashiwa Litzia desu",
     "source": "machine.json"
   },
   "interoperability": {
